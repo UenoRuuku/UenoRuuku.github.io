@@ -2,10 +2,28 @@
 <html>
 
 <head>
-	<title>Hyperspace by HTML5 UP</title>
+	<title>Ruuku's Index</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="assets/css/main.css" />
+	<style>
+		.container {
+			width: 70%;
+			background-color: #ddd;
+		}
+
+		.skills {
+			text-align: right;
+			padding-right: 20px;
+			line-height: 40px;
+			color: white;
+		}
+
+		.css {
+			width: 30%;
+			background-color: #2196F3;
+		}
+	</style>
 </head>
 
 <body>
@@ -85,7 +103,7 @@
 				<div class="content">
 					<div class="inner">
 						<h2>The Thomas</h2>
-						<p>A story about the train rebel against human beings.</p>
+						<p>A story about the train rebelled against human beings.</p>
 						<ul class="actions">
 							<li><a href="#" class="button">Learn more</a></li>
 						</ul>
@@ -147,12 +165,49 @@
 
 		<!-- Three -->
 		<section id="three" class="wrapper style1 fade-up">
-			<div class="inner">
+			<div class="inner" style="
+				background:  url(images/A.png) no-repeat fixed right;
+			">
 				<h2>Games in progress</h2>
-				<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat
-					malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet
-					imperdiet est velit quis lorem.</p>
-				
+				<h3>Time Witch's Memory</h3>
+				<br>
+				<span>Developing Progress</span>
+				<br>
+				<div class="container">
+					<div class="skills css">30%</div>
+				</div>
+				<br>
+				<h4><span class="icon major fa-chain"></span> Game Story</h4>
+				<p>The way to become a witch is to give up your memory till now. However, Hessein, Time witch, wants to
+					get her memory back. She wants to know why he chose to become the wicth</p>
+				<p>Lilith, the devil who brought magic to human beings, allowed her to find her memories in Lilith's
+					storage of memory and on Hessein's trip, she encountered memories of others and even those belongs
+					to people in future.</p>
+				<h4><span class="icon major fa-code"></span> Self-made player controller</h4>
+				<span>Using Math.SmoothDamp() to make keyboard have the same control feeling as joystick</span>
+				<pre style="margin: 0;">
+				<code  style="background:black">
+rig.velocity = 
+	new Vector2(Mathf.SmoothDamp(rig.velocity.x, WalkSpeed * Time.fixedDeltaTime * 60, ref velocityX, AccelerateTime), rig.velocity.y);
+				</code>
+			</pre>
+				<p>
+					When Arrow is pressed, the charater would not reach its max speed immediately. Instead, it will smoomthly increase its velocity until reach the max speed.
+					When you are using Joy stick, actually you obey the same operating pattern since you can not input 0/1 directly through the gamepad
+				</p>
+				<br>
+				<span>Using paramaters to change the gravity when player is falling or rising</span>
+				<pre>
+				<code style="background:black">
+void adjustGravity(){
+	if (rig.velocity.y < 0){
+		rig.velocity += Vector2.up * Physics2D.gravity.y * (FallMultiplier - 1) * Time.fixedDeltaTime;
+	}
+	else if (rig.velocity.y > 0 && Input.GetAxis("Jump") != 1){
+		rig.velocity += Vector2.up * Physics2D.gravity.y * (LowJumpMultiplier - 1) * Time.fixedDeltaTime;
+	}
+}
+				</code></pre>
 			</div>
 		</section>
 
