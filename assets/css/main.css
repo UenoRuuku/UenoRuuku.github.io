@@ -1,16 +1,6 @@
 @import url(font-awesome.min.css);
 
-@font-face
-{
-    font-family: headFont;
-    src: url(..\fonts\a.otf);
-}
 
-@font-face
-{
-    font-family: paraFont;
-    src: url(..\fonts\b.ttf);
-}
 
 /* Reset */
 
@@ -1707,12 +1697,10 @@
 	}
 
 	p {
-		font-family: paraFont;
 		margin: 0 0 2em 0;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		font-family:headFont;
 		color: #ffffff;
 		font-weight: bold;
 		line-height: 1.5;
