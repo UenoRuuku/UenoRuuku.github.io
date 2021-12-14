@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>The Thomas</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+        var unityInstance = UnityLoader.instantiate("unityContainer", "Build/后.json", { onProgress: UnityProgress });
+    </script>
+    <style>
+        .container {
+            width: 70%;
+            background-color: #ddd;
+        }
+
+        .skills {
+            text-align: right;
+            padding-right: 20px;
+            line-height: 40px;
+            color: white;
+        }
+
+        .css {
+            width: 30%;
+            background-color: #2196F3;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <section id="sidebar">
+        <div class="inner">
+            <nav>
+                <ul>
+                    <li><a href="#intro1">The Thomas</a></li>
+                    <li><a href="#one">Game Download</a></li>
+                    <li><a href="#two">Techniques</a></li>
+                    <li><a href="#three">Game Design</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Intro -->
+        <section id="intro1" class="wrapper style1 fullscreen fade-up"
+            style="background:#5e42a6 url(images/CM1.png) no-repeat fixed right;background-size: auto 70%;">
+            <div class="inner">
+                <h1>The Thomas</h1>
+                <span>Worked As <b>Main Designer</b> and <b>Programmer</b></span>
+                <br>
+                <span>Also on <a href="https://yukiruuku.itch.io/the-thomas">itch.io</a></span>
+                <br>
+                <a href="#one" style="font-size: 25px;">> Start to play</a>
+            </div>
+        </section>
+
+        <!-- One -->
+        <section id="one" class="wrapper style2 fade-up">
+            <div class="inner">
+                <h2>Game Download</h2>
+                <h3>Play online</h3>
+                <div>
+                    <h4></h4>
+                </div>
+                <div class="">
+                    <div id="unityContainer" style="width: 960px; height: 540px"></div>
+                    <div class="footer">
+                        <div class="webgl-logo"></div>
+                        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+                    </div>
+                </div>
+                <h5>Or you can download this game through my <a href="https://yukiruuku.itch.io/the-thomas">itch.io
+                        page</a></h5>
+                <br>
+                <h3>How to play</h3>
+                <br>
+                <p>
+                    <i>There are some problems on incompatibility of the webgl version. Please don't click the settings
+                        button.</i>
+                    <br>
+                    <i>To increase the fluency on the browser, the vedio embeded in the game is removed, and please
+                        click the button at the bottom-right corner to continue the game.</i>
+                </p>
+                <p style="color: white;">
+                    > Press A/D to control the direction of the train.
+                    <br>
+                    > Press Space to make the train accelerate.
+                    <br>
+                    > Use the carriage behind you to hit the enemy and collect them after every hit.
+                    <br>
+                    > Avoid being hit by the enemy, since they can kill you only in one hit.
+                </p>
+                <p> The game is a bit too difficult for a new hand, and there is a clearance video</p>
+            </div>
+        </section>
+
+
+        <!-- Two -->
+        <section id="two" class="wrapper style3 fade-up">
+            <div class="inner" style="font-size: 17px;color:white">
+                <h2>Techniques</h2>
+                <h3>Gameplay</h3>
+                <p> Mainly focus on the player controller</p>
+                <!-- <video src="./images/techinque1.mp4" style="width: 80%;" controls="controls">
+                    Your browser does not support the video tag.
+                </video> -->
+            </div>
+        </section>
+
+        <!-- Three -->
+        <section id="three" class="wrapper style1 spotlights">
+            <div class="inner" style="color:white;">
+                <h2>Game Design</h2>
+                <h3>Idea burst</h3>
+                <div>
+                    <p style="font-size: 17px;">
+                        The Game is based on a slightly serious theme, Climate Change. Climate Change is a natural
+                        phenomenon which can also be controlled by human activities to some extent. Sometimes human
+                        beings benefit from this phenomenon, but they also suffer from that. So I start to think that
+                        there should be the play-control character who can change the climate as he wish but sometimes
+                        die from that.
+                    </p>
+                    <img src="images/cma.gif">
+                </div>
+                <h3>Story</h3>
+                <div style="font-size: 17px;">
+                    <p>
+                        To be honest, I do add some of my interest in the story of the game.
+                    </p>
+                </div>
+                <h3>GamePlay</h3>
+                <div style="font-size: 17px;">
+                    <p>
+                        Platformer should be the best type of game to symbolize the period of overcoming a problem, and
+                        that's why
+                        I choose to design a platformer game. Then, naturally, the ability of the character becomes
+                        changing the climate
+                        in order to change the scene.
+                    </p>
+                    <p>
+                        Next, how to make the game worth playing? Upon me, a platformer that worth playing has following
+                        two characters:
+                        a comfortable controller and subtle level design. For part of controller, I assign this to
+                        "Techinque" part and you can click
+                        this hyperlink (<a href="#two">Technique</a>) to get to that part.
+                    </p>
+                    <p>
+                        The first thing I start to consider is why I feel excited when playing platformers. In
+                        <i>HollowKnight</i>, long-time stay in air forces player to
+                        calculate when to use the only jump chance and when to use the dash chance. This kind of design
+                        can be seen especially in Path of Pain,
+                        the most difficult part of platformer in <i>HollowKnight</i>. In this level, players are also
+                        required to use their attack on gears to reload their chance of dashing and jumping
+                        In <i>Celestial</i>, player are also required to calculate their strategy of jumping, but not so
+                        strict like HollowKnight. On the other hand, players have to
+                        calculate the left energy of the character which is shown by the emotion of the character.
+                    </p>
+                    <p>
+                        Like HollowKnight and Celestial, I prepare dash, jump and climb ability for players. To make the
+                        change of scene catch up with the fast pace of platformer game,
+                        I design levels that players have to change the climate/scene when they are in air. The thing
+                        that different from <i>HollowKnight</i> and <i>Celestial</i> is player's
+                        ability may have side effects on player. Meaning to make the game system not so sophisticated, I
+                        provide 3 climate/scene that players can convert to whenever they want.
+                        In <b>Tropical Climate</b>, there are more plants that the character can climb on but also more
+                        poisonous plants that will hurt the character. In <b>Desert Climate</b>, there
+                        are down-up wind that can help the character get to some places that that cannot be reached in
+                        other climate, but there are fewer walls that the character can climb on. In <b>Pole
+                            Climate</b>,
+                        the heavy wind will blow the chracter away in one direction and interfere the character's
+                        walking pace, but it can also make the character jump farther if being well controlled.
+                    </p>
+                    <p>
+                        Then it comes to the question that how to combine the change of the climate with the pace of
+                        platformers. Unlike puzzle games, players should be forced use their ability more frequently in
+                        a platformer rather
+                        choose one climate and just jump. My solution is to force the players to use their abilities
+                        when they are in the air.
+                        For example, in this level, players have to jump to a platform on which deadly plants are
+                        growing. Then naturally they switch to tropical climate to avoid the plants.
+                        However, the platforme they stand on is no longer safe in tropical climate. That means they have
+                        to jump towards the unsafe platform, during which they switch the climate.
+                        Moreover, players will understand the game pace through this way.
+                    </p>
+                </div>
+                <br>
+            </div>
+        </section>
+
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.scrollex.min.js"></script>
+    <script src="../assets/js/jquery.scrolly.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{
+"companyName": "DefaultCompany",
+"productName": "cgj",
+"productVersion": "0.1",
+"dataUrl": "后.data.unityweb",
+"wasmCodeUrl": "后.wasm.code.unityweb",
+"wasmFrameworkUrl": "后.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.4.16f1c1"
+}
