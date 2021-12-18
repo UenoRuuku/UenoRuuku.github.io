@@ -7,8 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/css/main.css" />
     <link rel="stylesheet" href="TemplateData/style.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/hybrid.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
     <script src="TemplateData/UnityProgress.js"></script>
     <script src="Build/UnityLoader.js"></script>
+    <script
+        src="https://cdn.bootcdn.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+    <script>hljs.highlightAll();
+        hljs.initLineNumbersOnLoad({
+            // 让单行的时候也显示行号
+            singleLine: true
+        });</script>
     <script>
         var unityInstance = UnityLoader.instantiate("unityContainer", "Build/后.json", { onProgress: UnityProgress });
     </script>
@@ -28,6 +37,29 @@
         .css {
             width: 30%;
             background-color: #2196F3;
+        }
+
+        pre code .hljs-ln-numbers {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            text-align: right;
+            color: #ccc;
+            border-right: 1px solid #CCC;
+            vertical-align: top;
+            padding-right: 5px;
+
+            /* your custom style here */
+        }
+
+        /* for block of code */
+        pre code .hljs-ln-code {
+            padding-left: 10px;
+            /* padding-left: 30px; */
         }
     </style>
 </head>
@@ -52,19 +84,18 @@
 
         <!-- Intro -->
         <section id="intro1" class="wrapper style1 fullscreen fade-up"
-            style="background:#5e42a6 url(images/CM1.png) no-repeat fixed right;background-size: auto 70%;">
+            style="background:#5e42a6 url(../images/g2b1.png) no-repeat fixed right;background-size: auto 70%;">
             <div class="inner">
                 <h1>The Thomas</h1>
                 <span>Worked As <b>Main Designer</b> and <b>Programmer</b></span>
                 <br>
                 <span>Also on <a href="https://yukiruuku.itch.io/the-thomas">itch.io</a></span>
-                <br>
-                <a href="#one" style="font-size: 25px;">> Start to play</a>
+
             </div>
         </section>
 
         <!-- One -->
-        <section id="one" class="wrapper style2 fade-up">
+        <section id="one" class="wrapper style2 fade-up" style = "background: #3e4094 url(../images/g2b2.png) no-repeat fixed right;background-size: auto 70%;">
             <div class="inner">
                 <h2>Game Download</h2>
                 <h3>Play online</h3>
@@ -105,19 +136,155 @@
 
 
         <!-- Two -->
-        <section id="two" class="wrapper style3 fade-up">
+        <section id="two" class="wrapper style3 fade-up" style = "background: #b74e91 url(../images/g2b1.png) no-repeat fixed right;background-size: auto 70%;">
             <div class="inner" style="font-size: 17px;color:white">
                 <h2>Techniques</h2>
-                <h3>Gameplay</h3>
-                <p> Mainly focus on the player controller</p>
-                <!-- <video src="./images/techinque1.mp4" style="width: 80%;" controls="controls">
-                    Your browser does not support the video tag.
-                </video> -->
+                <h3>Player Controller</h3>
+                <p>
+                    The player controller of the game can be divided into two parts: the train engine and the carriage.
+                </p>
+                <h3>train engine</h3>
+                <p>
+                    The train engine is typically a game object providing the force to make the whole train move. I
+                    choose to use the classic type of controlling - throttle and steering wheel. I uses a Math function
+                    to make
+                    the acceleration of the train linear. The train reaches its top speed after a little period of
+                    acceleration and
+                    also needs a period of time to stop itself after players stop holding the throttle button.
+                </p>
+                <pre>
+                    <code data-ln-single-line="true" class="c#">float cos = Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad);
+float sin = Mathf.Sin(transform.eulerAngles.z * Mathf.Deg2Rad);
+rb.velocity = new Vector2(Mathf.SmoothDamp(rb.velocity.x, 
+                                           runSpeed * Time.fixedDeltaTime * 60 * cos, 
+                                           ref velocityX, 
+                                           AccelerateTime),
+                          Mathf.SmoothDamp(rb.velocity.y, 
+                                           runSpeed * 60 *  Time.fixedDeltaTime * sin, 
+                                           ref velocityY, 
+                                           AccelerateTime));
+                </code>
+                </pre>
+                <p>
+                    To simulate the progress of using a steering wheel to change the direction, when players press the
+                    left & right button, the rotation of the transform will be changed gradually by a certain speed.
+                </p>
+                <pre>
+                    <code data-ln-single-line="true" class="c#">if (horizontalmove != 0)
+{
+    float toAngle = transform.eulerAngles.z - horizontalmove * rotationSpeed * Time.fixedDeltaTime * 60 % 360;
+    if (toAngle < 0) {
+        toAngle += 360;
+    }
+    transform.rotation = Quaternion.Euler(0,0,toAngle) ;
+}
+                    </code>
+                </pre>
+                <p>The full version of the train engine controller can be downloaded <a
+                        href="../assets/TrainEngineController.cs">HERE</a></p>
+                <h3>Carriage</h3>
+                <p>
+                    To realize the function that after an attack the carriage fall off from the train engine and being
+                    recollected by the train engine, a data structure similar to linked list is applied.
+                    Furthermore, since the carriage has two state - being connected to the train engine/the former
+                    carriage and falling off from the train engine, a finite state machine is designed to manage
+                    the state of the carriage. The state machine keeps the number of the carriage and other components
+                    of the carriage.
+                </p>
+                <pre>
+                    <code data-ln-single-line="true" class="c#">states.Add("Running", new RunningState(this));
+states.Add("Stopping", new StoppingState(this));
+TransitionState("Stopping");
+currentState = states["Stopping"];
+                    </code>
+                </pre>
+                <p>In stopping state, the carriage is no longer a collider but a trigger. The Joint using to connect
+                    itself
+                    with the former carriage is disabled so as to fall from that carriage.
+                </p>
+                <pre>
+                    <code data-ln-single-line="true" class="c#">public void onUpdate()
+{
+    tm.rb.velocity = (tm.player.transform.position - tm.transform.position).normalized * 9;
+}
+
+public void onEnter()
+{
+    //disable the distance joint
+    tm.dj.enabled = false;
+    tm.rb.velocity = new Vector2(0, 0);
+    //alter the collider to the trigger
+    tm.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+}
+                    </code>
+                </pre>
+                <p>On the other hand, in running state, the carriage becomes a collider so that it will hit the other
+                    objects in the scene and can interact with the train engine.
+                    The joint is enabled and a variable is created to save the former carriage.
+                </p>
+                <p>
+                    When hitting the Boss, the train engine will disable the carriage and turn it into stop state. Since
+                    it is not a trigger in running state, when in stopping state,
+                    we can also use this function to deal with the collection of the carriage.
+                </p>
+                <pre>
+                    <code>public void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.gameObject.tag == "Player") {
+        collision.gameObject.GetComponent<TrainEngineController>().addTrunk(gameObject);
+    }
+    if (collision.gameObject.tag == "Boss" && state == "Running")
+    {
+        //do damage to the Boss
+        collision.gameObject.GetComponent<FSM>().getHurt();
+        player.GetComponent<TrainEngineController>().disableTrunk(num);
+    }
+}
+                    </code>
+                </pre>
+                <p>
+                    The train engine is also responsible for the connection and disablility of the carriage.
+                    When the carriage is recollected, itself is sent to the train engine. After checking its position
+                    the the list of carriages,
+                    the joint is set to connect the carriage and the last carriage of the carriage list.
+                </p>
+                <p>
+                    When the trunk falls from the train, since both itself and the carriage connected to it will fall
+                    from the former carriage,
+                    a loop is set to disconnect all the carriages from the last to the current one.
+                </p>
+                <pre>
+                    <code>public void addTrunk(GameObject gb)
+{
+    if (trunks.Count >= 1)
+    {
+        gb.GetComponent<TrunkStateMachine>().getIn(trunks[trunks.Count - 1], trunks.Count);
+        trunks[trunks.Count - 1].GetComponent<TrunkStateMachine>().putOn(gb);
+    }
+    else {
+        sj.enabled = true;
+        sj.anchor = back.transform.localPosition;
+        sj.connectedBody = gb.GetComponent<Rigidbody2D>();
+        gb.GetComponent<TrunkStateMachine>().getIn(gameObject, trunks.Count);
+    }
+    trunks.Add(gb);
+}
+public void disableTrunk(int num) 
+{
+    for (int i = trunks.Count-1; i >= num; i--) {
+        trunks[i].GetComponent<TrunkStateMachine>().getOut();
+        trunks.RemoveAt(i);
+    }
+}
+                    </code>
+                </pre>
+                <p>The full version of the state machine can be downloaded <a
+                        href="../assets/TrunkStateMachine.cs">HERE</a></p>
             </div>
         </section>
 
         <!-- Three -->
-        <section id="three" class="wrapper style1 spotlights">
+        <section id="three" class="wrapper style1 spotlights" style="background:#5052b5 url(../images/g2b2.png) no-repeat fixed right;background-size: auto 70%;">
             <div class="inner" style="color:white;">
                 <h2>Game Design</h2>
                 <h3>Idea burst</h3>
@@ -139,67 +306,44 @@
                         train is just like the bullfighter, escaping the attack but also getting closer to the danger.
                         And this determined how we made this game - the Thomas.
                     </p>
-                    <img src="images/cma.gif">
                 </div>
                 <h3>Story</h3>
                 <div style="font-size: 17px;">
                     <p>
-                        To be honest, I do add some of my interest in the story of the game.
+                        With the King of the Train Kingdom surrendering to human beings, the train are reduced to slaves
+                        of human beings. They are forced to convey resources and please human beings.
+                        Some trains want to rebel against the brutality of human beings and among them is the main
+                        charater - the Thomas.
+                        <br>
+                        The Thomas used to be a mercenary before the fall of the Train Kingdom. He managed to escape
+                        from the human-controlled territory. However, on his last step towards liberty, he ran into a
+                        tough enemy - a human bounty hunter. The combat started immediately.
                     </p>
                 </div>
                 <h3>GamePlay</h3>
                 <div style="font-size: 17px;">
                     <p>
-                        Platformer should be the best type of game to symbolize the period of overcoming a problem, and
-                        that's why
-                        I choose to design a platformer game. Then, naturally, the ability of the character becomes
-                        changing the climate
-                        in order to change the scene.
+                        As has mentioned above, I decided to simulate a feeling of bullfight in my game. A great
+                        character of bullfight is the very little distance between dead and alive. When I am designing
+                        the train controller and the Boss AI, I purposedly making players cannot hit the Boss easily by
+                        just making sudden turns continuously. The smallest arc the train can make is restricted to half
+                        size of the scene
+                        and since the boss is constantly moving towards the player, if the player keeps holding one
+                        direction button and the acceleration button, he can hardly hit the boss twice. This kind of
+                        design makes the player have to focus on his position after making an attack, which as a result
+                        makes the pace of the game more fast and more intensely.
                     </p>
+                    <div style="width: 100%; text-align:center">
+                        <img src="/images/g1.png" style="width:50%">
+                    </div>
+                    <br>
                     <p>
-                        Next, how to make the game worth playing? Upon me, a platformer that worth playing has following
-                        two characters:
-                        a comfortable controller and subtle level design. For part of controller, I assign this to
-                        "Techinque" part and you can click
-                        this hyperlink (<a href="#two">Technique</a>) to get to that part.
-                    </p>
-                    <p>
-                        The first thing I start to consider is why I feel excited when playing platformers. In
-                        <i>HollowKnight</i>, long-time stay in air forces player to
-                        calculate when to use the only jump chance and when to use the dash chance. This kind of design
-                        can be seen especially in Path of Pain,
-                        the most difficult part of platformer in <i>HollowKnight</i>. In this level, players are also
-                        required to use their attack on gears to reload their chance of dashing and jumping
-                        In <i>Celestial</i>, player are also required to calculate their strategy of jumping, but not so
-                        strict like HollowKnight. On the other hand, players have to
-                        calculate the left energy of the character which is shown by the emotion of the character.
-                    </p>
-                    <p>
-                        Like HollowKnight and Celestial, I prepare dash, jump and climb ability for players. To make the
-                        change of scene catch up with the fast pace of platformer game,
-                        I design levels that players have to change the climate/scene when they are in air. The thing
-                        that different from <i>HollowKnight</i> and <i>Celestial</i> is player's
-                        ability may have side effects on player. Meaning to make the game system not so sophisticated, I
-                        provide 3 climate/scene that players can convert to whenever they want.
-                        In <b>Tropical Climate</b>, there are more plants that the character can climb on but also more
-                        poisonous plants that will hurt the character. In <b>Desert Climate</b>, there
-                        are down-up wind that can help the character get to some places that that cannot be reached in
-                        other climate, but there are fewer walls that the character can climb on. In <b>Pole
-                            Climate</b>,
-                        the heavy wind will blow the chracter away in one direction and interfere the character's
-                        walking pace, but it can also make the character jump farther if being well controlled.
-                    </p>
-                    <p>
-                        Then it comes to the question that how to combine the change of the climate with the pace of
-                        platformers. Unlike puzzle games, players should be forced use their ability more frequently in
-                        a platformer rather
-                        choose one climate and just jump. My solution is to force the players to use their abilities
-                        when they are in the air.
-                        For example, in this level, players have to jump to a platform on which deadly plants are
-                        growing. Then naturally they switch to tropical climate to avoid the plants.
-                        However, the platforme they stand on is no longer safe in tropical climate. That means they have
-                        to jump towards the unsafe platform, during which they switch the climate.
-                        Moreover, players will understand the game pace through this way.
+                        Furthermore, the carriages of the train would fall from the train engine after an attack. How to
+                        collect
+                        the fallen carriages as well as escape the attacks from the Boss. The fallen carriages will move
+                        towards the player with a rather small speed. This helps avoid the carriages get stuck in
+                        certain
+                        areas and reduces the difficulty of the game.
                     </p>
                 </div>
                 <br>
