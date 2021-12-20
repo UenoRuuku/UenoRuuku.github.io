@@ -8,19 +8,7 @@
     <link rel="stylesheet" href="../assets/css/main.css" />
     <link rel="stylesheet" href="TemplateData/style.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/hybrid.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-    <script src="TemplateData/UnityProgress.js"></script>
-    <script src="Build/UnityLoader.js"></script>
-    <script
-        src="https://cdn.bootcdn.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-    <script>hljs.highlightAll();
-        hljs.initLineNumbersOnLoad({
-            // 让单行的时候也显示行号
-            singleLine: true
-        });</script>
-    <script>
-        var unityInstance = UnityLoader.instantiate("unityContainer", "Build/后.json", { onProgress: UnityProgress });
-    </script>
+
     <style>
         .container {
             width: 70%;
@@ -361,7 +349,20 @@ public void disableTrunk(int num)
     <script src="../assets/js/util.js"></script>
     <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
     <script src="../assets/js/main.js"></script>
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script
+        src="https://cdn.bootcdn.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        hljs.initLineNumbersOnLoad({
+            // 让单行的时候也显示行号
+            singleLine: true
+        });</script>
+    <script>
+        var unityInstance = UnityLoader.instantiate("unityContainer", "Build/后.json", { onProgress: UnityProgress });
+    </script>
 </body>
 
 </html>
