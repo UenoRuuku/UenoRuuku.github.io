@@ -1,0 +1,2 @@
+g1c.mp4 filter=lfs diff=lfs merge=lfs -text
+techinque1.mp4 filter=lfs diff=lfs merge=lfs -text
