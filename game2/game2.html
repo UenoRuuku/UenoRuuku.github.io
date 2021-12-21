@@ -181,7 +181,8 @@ rb.velocity = new Vector2(Mathf.SmoothDamp(rb.velocity.x,
                     of the carriage.
                 </p>
                 <pre>
-                    <code data-ln-single-line="true" class="c#">states.Add("Running", new RunningState(this));
+                    <code data-ln-single-line="true" class="c#">//states is a dictionary storing all the instances of different states.
+states.Add("Running", new RunningState(this));
 states.Add("Stopping", new StoppingState(this));
 TransitionState("Stopping");
 currentState = states["Stopping"];
