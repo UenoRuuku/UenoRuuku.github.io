@@ -121,22 +121,22 @@
                 </p>
                 <pre>
                     <code class="c#">if (Input.GetAxisRaw("Horizontal") > InputOffset.x)
-                        {
-                            rig.velocity = new Vector2(Mathf.SmoothDamp(rig.velocity.x, windMultiA * WalkSpeed * Time.fixedDeltaTime * 60, ref velocityX, AccelerateTime), rig.velocity.y);
-                            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y, transform.localScale.z);
-                            anim.SetFloat("run", 1f);
-                        }
-                        else if (Input.GetAxisRaw("Horizontal") < InputOffset.x * -1)
-                        {
-                            rig.velocity = new Vector2(Mathf.SmoothDamp(rig.velocity.x, windMultiB * WalkSpeed * Time.fixedDeltaTime * 60 * -1, ref velocityX, AccelerateTime), rig.velocity.y);
-                            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                            anim.SetFloat("run", 1f);
-                        }
-                        else
-                        {
-                            rig.velocity = new Vector2(Mathf.SmoothDamp(rig.velocity.x, 0, ref velocityX, DecelerateTime), rig.velocity.y);
-                            anim.SetFloat("run", 0);
-                        }
+{
+    rig.velocity = new Vector2(Mathf.SmoothDamp(rig.velocity.x, windMultiA * WalkSpeed * Time.fixedDeltaTime * 60, ref velocityX, AccelerateTime), rig.velocity.y);
+    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y, transform.localScale.z);
+    anim.SetFloat("run", 1f);
+}
+else if (Input.GetAxisRaw("Horizontal") < InputOffset.x * -1)
+{
+    rig.velocity = new Vector2(Mathf.SmoothDamp(rig.velocity.x, windMultiB * WalkSpeed * Time.fixedDeltaTime * 60 * -1, ref velocityX, AccelerateTime), rig.velocity.y);
+    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+    anim.SetFloat("run", 1f);
+}
+else
+{
+    rig.velocity = new Vector2(Mathf.SmoothDamp(rig.velocity.x, 0, ref velocityX, DecelerateTime), rig.velocity.y);
+    anim.SetFloat("run", 0);
+}
                     </code>
                 </pre>
                 <p>
@@ -150,14 +150,14 @@
                 </p>
                 <pre>
                     <code class="c#">// activate if jumping
-                        if (rig.velocity.y < 0)
-                        {
-                            rig.velocity += Vector2.up * Physics2D.gravity.y * (FallMultiplier - 1) * Time.fixedDeltaTime;
-                        }
-                        else if (rig.velocity.y > 0 && Input.GetAxis("Jump") != 1)
-                        {
-                            rig.velocity += Vector2.up * Physics2D.gravity.y * (LowJumpMultiplier - 1) * Time.fixedDeltaTime;
-                        }
+if (rig.velocity.y < 0)
+{
+    rig.velocity += Vector2.up * Physics2D.gravity.y * (FallMultiplier - 1) * Time.fixedDeltaTime;
+}
+else if (rig.velocity.y > 0 && Input.GetAxis("Jump") != 1)
+{
+    rig.velocity += Vector2.up * Physics2D.gravity.y * (LowJumpMultiplier - 1) * Time.fixedDeltaTime;
+}
                     </code>
                 </pre>
                 <p>
@@ -176,26 +176,26 @@
                 <pre>
                     
                     <code class="c#">IEnumerator Dash()
-                    {
-                        gameObject.layer = 12;
-                        canMove = false;
-                        canJump = false;
-                        GravityModifier = false;
-                        rig.gravityScale = 0;
-                        rig.velocity = new Vector2(rig.velocity.x, 0);
-                        DOVirtual.Float(DragMaxForce, 0, DragDuration, RigidbodyDrag);
-                        yield return new WaitForSecondsRealtime(DashTime);
-                
-                        canMove = true;
-                        canJump = true;
-                        GravityModifier = true;
-                        rig.gravityScale = 1;
-                        DashParticleSystem.SetActive(false);
-                        gameObject.layer = 9;
-                        yield return new WaitForSecondsRealtime(CoolDownTime);
-                
-                        coolDownEnd = true;
-                    }
+{
+    gameObject.layer = 12;
+    canMove = false;
+    canJump = false;
+    GravityModifier = false;
+    rig.gravityScale = 0;
+    rig.velocity = new Vector2(rig.velocity.x, 0);
+    DOVirtual.Float(DragMaxForce, 0, DragDuration, RigidbodyDrag);
+    yield return new WaitForSecondsRealtime(DashTime);
+
+    canMove = true;
+    canJump = true;
+    GravityModifier = true;
+    rig.gravityScale = 1;
+    DashParticleSystem.SetActive(false);
+    gameObject.layer = 9;
+    yield return new WaitForSecondsRealtime(CoolDownTime);
+
+    coolDownEnd = true;
+}
                     </code>
                 </pre>
             </div>
