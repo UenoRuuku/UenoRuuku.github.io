@@ -104,7 +104,7 @@
                 style="font-size: 17px;color:white;background:#953d75 url(images/CM1.png) no-repeat fixed right;background-size: auto 70%;">
                 <h2>Techniques</h2>
                 <p>player controller</p>
-                <h3>vedio</h3>
+                <h3>video</h3>
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/KZPef-ZXRk4"
                     title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -112,7 +112,7 @@
                 <br>
                 <p>You can download the source code of Player controller [<a href="/assets/PlayerCtrl.cs">Here</a>].
                 </p>
-                <h3>text</h3>
+                <h3>Some ideas</h3>
                 <h4>move</h4>
                 <p>
                     It's common that the rigidbody2D component is applied to make the player move under a certain
@@ -120,8 +120,23 @@
                     when the velocity of the rigid body changes, it changes linearly rather than directly from 1 to 0.
                 </p>
                 <pre>
-                    <code class="c#">
-//wait to be filled
+                    <code class="c#">if (Input.GetAxisRaw("Horizontal") > InputOffset.x)
+                        {
+                            rig.velocity = new Vector2(Mathf.SmoothDamp(rig.velocity.x, windMultiA * WalkSpeed * Time.fixedDeltaTime * 60, ref velocityX, AccelerateTime), rig.velocity.y);
+                            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y, transform.localScale.z);
+                            anim.SetFloat("run", 1f);
+                        }
+                        else if (Input.GetAxisRaw("Horizontal") < InputOffset.x * -1)
+                        {
+                            rig.velocity = new Vector2(Mathf.SmoothDamp(rig.velocity.x, windMultiB * WalkSpeed * Time.fixedDeltaTime * 60 * -1, ref velocityX, AccelerateTime), rig.velocity.y);
+                            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                            anim.SetFloat("run", 1f);
+                        }
+                        else
+                        {
+                            rig.velocity = new Vector2(Mathf.SmoothDamp(rig.velocity.x, 0, ref velocityX, DecelerateTime), rig.velocity.y);
+                            anim.SetFloat("run", 0);
+                        }
                     </code>
                 </pre>
                 <p>
@@ -134,8 +149,15 @@
                     then how high the character jumps is bind with that, too.
                 </p>
                 <pre>
-                    <code class="c#">
-
+                    <code class="c#">// activate if jumping
+                        if (rig.velocity.y < 0)
+                        {
+                            rig.velocity += Vector2.up * Physics2D.gravity.y * (FallMultiplier - 1) * Time.fixedDeltaTime;
+                        }
+                        else if (rig.velocity.y > 0 && Input.GetAxis("Jump") != 1)
+                        {
+                            rig.velocity += Vector2.up * Physics2D.gravity.y * (LowJumpMultiplier - 1) * Time.fixedDeltaTime;
+                        }
                     </code>
                 </pre>
                 <p>
@@ -147,8 +169,35 @@
                 </p>
                 <p>
                     I applied the free edition of dotween to realize the dash of the character. The characteristic of
-                    dashing is
+                    dashing is that the player can not be influenced by the gravity. I applied a coroutine to control
+                    when
+                    the gravity recovers and used the drag effect of dotween to make the player move.
                 </p>
+                <pre>
+                    
+                    <code class="c#">IEnumerator Dash()
+                    {
+                        gameObject.layer = 12;
+                        canMove = false;
+                        canJump = false;
+                        GravityModifier = false;
+                        rig.gravityScale = 0;
+                        rig.velocity = new Vector2(rig.velocity.x, 0);
+                        DOVirtual.Float(DragMaxForce, 0, DragDuration, RigidbodyDrag);
+                        yield return new WaitForSecondsRealtime(DashTime);
+                
+                        canMove = true;
+                        canJump = true;
+                        GravityModifier = true;
+                        rig.gravityScale = 1;
+                        DashParticleSystem.SetActive(false);
+                        gameObject.layer = 9;
+                        yield return new WaitForSecondsRealtime(CoolDownTime);
+                
+                        coolDownEnd = true;
+                    }
+                    </code>
+                </pre>
             </div>
         </section>
 
