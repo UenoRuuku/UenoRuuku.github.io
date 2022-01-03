@@ -85,7 +85,7 @@
                     <br>
                     > Press Space to jump.
                     <br>
-                    > Press W to interact with npcs, billboards and so on
+                    > Press W to interact with NPCs, billboards and so on
                     <br>
                     > Press J to dash and continue the dialogue.
                 </p>
@@ -112,12 +112,11 @@
                 <br>
                 <p>You can download the source code of Player controller [<a href="/assets/PlayerCtrl.cs">Here</a>].
                 </p>
-                <h3>Some ideas</h3>
-                <h4>move</h4>
+                <h3>Some detailed information on player controller</h3>
                 <p>
                     It's common that the rigidbody2D component is applied to make the player move under a certain
-                    velocity. To make the player move fluently, a Math function is applied to realize the function that
-                    when the velocity of the rigid body changes, it changes linearly rather than directly from 1 to 0.
+                    velocity. To make the player move fluently, a Math function is applied to make the velocity 
+                    change linearly rather than directly from 1 to 0.
                 </p>
                 <pre>
                     <code class="c#">if (Input.GetAxisRaw("Horizontal") > InputOffset.x)
@@ -170,8 +169,7 @@ else if (rig.velocity.y > 0 && Input.GetAxis("Jump") != 1)
                 <p>
                     I applied the free edition of dotween to realize the dash of the character. The characteristic of
                     dashing is that the player can not be influenced by the gravity. I applied a coroutine to control
-                    when
-                    the gravity recovers and used the drag effect of dotween to make the player move.
+                    when the gravity recovers and used the drag effect of dotween to make the player move.
                 </p>
                 <pre>
 
