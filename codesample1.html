@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>The journey of climate magi</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/hybrid.min.css">
+    <style>
+        .container {
+            width: 70%;
+            background-color: #ddd;
+        }
+
+        .skills {
+            text-align: right;
+            padding-right: 20px;
+            line-height: 40px;
+            color: white;
+        }
+
+        .css {
+            width: 30%;
+            background-color: #2196F3;
+        }
+    </style>
+</head>
+
+<body>
+               
+        <!-- Three -->
+        <section id="three" class="wrapper style2 spotlights"
+            style="background:#5052b5">
+            <div class="inner" style="color:white;">
+                <h1>Game Framework</h1>
+                
+                Github: https://github.com/UenoRuuku/RuukuGFW
+
+                <pre>
+                    <code class="c#">if (Input.GetAxisRaw("Horizontal") > InputOffset.x)
+{
+    rig.velocity = new Vector2(Mathf.SmoothDamp(rig.velocity.x, windMultiA * WalkSpeed * Time.fixedDeltaTime * 60, ref velocityX, AccelerateTime), rig.velocity.y);
+    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y, transform.localScale.z);
+    anim.SetFloat("run", 1f);
+}
+else if (Input.GetAxisRaw("Horizontal") < InputOffset.x * -1)
+{
+    rig.velocity = new Vector2(Mathf.SmoothDamp(rig.velocity.x, windMultiB * WalkSpeed * Time.fixedDeltaTime * 60 * -1, ref velocityX, AccelerateTime), rig.velocity.y);
+    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+    anim.SetFloat("run", 1f);
+}
+else
+{
+    rig.velocity = new Vector2(Mathf.SmoothDamp(rig.velocity.x, 0, ref velocityX, DecelerateTime), rig.velocity.y);
+    anim.SetFloat("run", 0);
+}
+                    </code>
+                </pre>
+                <div>
+                    <p style="font-size: 17px;">
+                        The game is based on a slightly serious theme, Climate Change. Climate Change is a natural
+                        phenomenon which can also be controlled by human activities to some extent. Sometimes human
+                        beings benefit from this phenomenon, but they also suffer from that. So I start to think that
+                        the play-control character should change the climate as he wishes but sometimes dies from that.
+                        And then comes the Climate Magi, a magi with the ability to change the climate. Sometimes he
+                        benefits from the lush vines of Tropical Climate, by which he can get to a higher platform or
+                        overcome some trouble. Sometimes he gets hurt due to the overwhelmingly grown poison vines in
+                        his way.
+
+                    </p>
+                    <div style="text-align: center; width: 100%;">
+                        <img src="images/cma.gif">
+                    </div>
+                </div>
+                <h3>GamePlay</h3>
+                <div style="font-size: 17px;">
+                    <p>
+                        Platformer should be the best type of game to symbolize the period of overcoming a problem, and
+                        that's why
+                        I choose to design a platformer game. Then, naturally, the ability of the character becomes
+                        changing the climate
+                        in order to change the scene.
+                    </p>
+                    <p>
+                        Next, how to make the game worth playing? Upon me, a platformer that worth playing has following
+                        two characters:
+                        a comfortable controller and exciting level design. For part of controller, I assign this to
+                        "Techinque" part and you can click
+                        this hyperlink (<a href="#two">Technique</a>) to get to that part.
+                    </p>
+                    <p>
+                        The first thing I start to consider is why I feel excited when playing platformers. In
+                        <i>HollowKnight</i>, long-time stay in air forces player to
+                        calculate when to use the only jump chance and when to use the dash chance. This kind of design
+                        can be seen especially in Path of Pain,
+                        the most difficult part of platformer in <i>HollowKnight</i>. In this level, players are also
+                        required to use their attack on gears to reload their chance of dashing and jumping
+                        In <i>Celestial</i>, player are also required to calculate their strategy of jumping, but not so
+                        strict like HollowKnight. On the other hand, players have to
+                        calculate the left energy of the character which is shown by the emotion of the character.
+                    </p>
+                    <p>
+                        Like HollowKnight and Celestial, I prepare dash, jump and climb ability for players. To make the
+                        change of scene catch up with the fast pace of platformer game,
+                        I design levels that players have to change the climate/scene when they are in air. The thing
+                        that different from <i>HollowKnight</i> and <i>Celestial</i> is player's
+                        ability may have side effects on player. Meaning to make the game system not so sophisticated, I
+                        provide 3 climate/scene that players can convert to whenever they want.
+                        In <b>Tropical Climate</b>, there are more plants that the character can climb on but also more
+                        poisonous plants that will hurt the character. In <b>Desert Climate</b>, there
+                        are down-up wind that can help the character get to some places that that cannot be reached in
+                        other climate, but there are fewer walls that the character can climb on. In <b>Pole
+                            Climate</b>,
+                        the heavy wind will blow the chracter away in one direction and interfere the character's
+                        walking pace, but it can also make the character jump farther if being well controlled.
+                    </p>
+                    <p>
+                        Then it comes to the question that how to combine the change of the climate with the pace of
+                        platformers. Unlike puzzle games, players should be forced use their ability more frequently in
+                        a platformer rather than
+                        choose one climate and just jump. My solution is to force the players to use their abilities
+                        when they are in the air.
+                    </p>
+                    <div style="display:table-cell; text-align:center">
+                        <div style="display: flex;">
+                            <img src="/images/g1pp1.png" style="width: 50%;">
+                            <img src="/images/g1pp2.png" style="width: 50%;">
+                        </div>
+                    </div>
+                    <br>
+                    <p>
+                        For example, in this level, players have to jump to a platform on which deadly plants are
+                        growing. Then naturally they switch to tropical climate to avoid the plants.
+                        However, the platforme they stand on is no longer safe in tropical climate. That means they have
+                        to jump towards the unsafe platform, during which they switch the climate.
+                        Moreover, players will understand the game pace through this way.
+                    </p>
+                    <p>
+                        It is also possible to design some interesting mechanisms. For example, at the end of the game, there is
+                        a continuous up-moving
+                        elevator made by the up air stream in Desert Climate. These mechanisms promise huge space on
+                        further level design.
+                    </p>
+                </div>
+                <br>
+            </div>
+        </section>
+
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="assets/js/main.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script
+        src="https://cdn.bootcdn.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        hljs.initLineNumbersOnLoad({
+            // 让单行的时候也显示行号
+            singleLine: true
+        });</script>
+    <script>
+        var unityInstance = UnityLoader.instantiate("unityContainer", "Build/h5demo.json", { onProgress: UnityProgress });
+    </script>
+
+</body>
+
+</html>
